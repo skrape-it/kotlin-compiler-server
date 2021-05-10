@@ -71,6 +71,10 @@ allprojects {
 dependencies {
     kotlinDependency("junit:junit:4.12")
     kotlinDependency("org.hamcrest:hamcrest:2.2")
+    kotlinDependency("io.strikt:strikt-core:0.31.0")
+    kotlinDependency("it.skrape:skrapeit:1.1.1") {
+        isTransitive = true
+    }
     kotlinDependency("com.fasterxml.jackson.core:jackson-databind:2.12.1")
     kotlinDependency("com.fasterxml.jackson.core:jackson-core:2.12.1")
     kotlinDependency("com.fasterxml.jackson.core:jackson-annotations:2.12.1")

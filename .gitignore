@@ -29,3 +29,7 @@ out/
 
 ### VS Code ###
 .vscode/
+/1.5.0/
+/1.5.0-js/
+/indexes.json
+/indexesJs.json
