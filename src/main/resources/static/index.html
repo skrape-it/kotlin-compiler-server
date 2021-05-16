@@ -35,35 +35,45 @@
     <h2><a href="https://github.com/skrapeit/skrape.it">skrape{it}</a> example</h2>
 </header>
 <main>
-    <code data-version="1.0.7" theme="darcula" data-autocomplete="true" highlight-on-fly="true" lines="true"
-          match-brackets="true" style="height: 50%">
-        import strikt.api.*
-        import strikt.assertions.*
-        import it.skrape.core.*
-        import it.skrape.fetcher.HttpFetcher
-        import it.skrape.fetcher.skrape
-        import it.skrape.fetcher.extract
-        import it.skrape.fetcher.expect
-        import it.skrape.matchers.*
-        import it.skrape.selects.*
-        import it.skrape.selects.html5.*
+    <code data-version="1.0.7" theme="darcula" data-autocomplete="true" highlight-on-fly="true" lines="true" match-brackets="true">
+import it.skrape.core.*
+import it.skrape.fetcher.HttpFetcher
+import it.skrape.fetcher.skrape
+import it.skrape.fetcher.extract
+import it.skrape.fetcher.expect
+import it.skrape.matchers.*
+import it.skrape.selects.*
+import it.skrape.selects.html5.*
+import example.Data
 
-        fun main() {
-          //sampleStart
-          val statusCode = skrape(HttpFetcher) {
-            request {
-              url = "https://github.com/skrapeit/skrape.it"
-            }
-            extract {
-              status {
-                code
-              }
-            }
+fun main() {
+  //sampleStart
+
+
+  val scrapedData = skrape(HttpFetcher) {
+    request {
+      url = "https://github.com/skrapeit/skrape.it"
+    }
+    extract {
+      Data(
+        status = status { code },
+        stars = htmlDocument {
+          a {
+            withClass = "social-count"
+            findFirst { text.toInt() }
           }
-
-          println(statusCode)
-          //sampleEnd
         }
+      )
+    }
+  }
+
+  println(scrapedData)
+  //sampleEnd
+}
+        <textarea class="hidden-dependency">
+            package example
+            data class Data(val status: Int, val stars: Int)
+        </textarea>
     </code>
 </main>
 </body>
